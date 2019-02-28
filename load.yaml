@@ -1,0 +1,19 @@
+phantom:
+  address: your_web_server_ip_address:port
+  ssl: true #if you want to use https requests
+  load_profile:
+    load_type: rps # schedule load by defining requests per second
+    schedule: line(1, 10, 10m) # starting from 1rps growing linearly to 10rps during 10 minutes
+  header_http: "1.1"
+  headers:
+    - "[Host: your_web_server_domain]"
+    - "[Connection: close]"
+  uris: #set of uris to test
+    - "/"
+    - "/buy"
+    - "/news?page=18"
+    - "/shop/products"
+console: #output to console
+  enabled: true 
+telegraf: #metrics collection through SSH connection
+  enabled: false
